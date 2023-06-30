@@ -65,69 +65,6 @@ class WebFloorPlanApp(object):
             print(f'Error: {str(e)}')
             return WebFloorPlanApp.templates.TemplateResponse("response.html", {"request": request}, 400)
 
-    @staticmethod
-    async def send_email_with_attachment(filename: AnyStr) -> bool:
-        from email import encoders
-        from email.mime.base import MIMEBase
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
-
-        try:
-            from datetime import date
-
-            context = ssl.create_default_context()
-            smtp_server = "smtp.mail.yahoo.com"
-            sender = "pnicolas57@yahoo.com"
-            receiver = "pnicolas57@yahoo.com"
-            password = "icytndijfrpshrwe"
-            today_date = date.today()
-            subject = f"""Subject: Floor plan {filename} uploaded!"""
-            content = f"""A new floor plan has been uploaded as {filename} into directory floorplan/files\n\n"""
-
-            message = MIMEMultipart()
-            message["From"] = sender
-            message["To"] = receiver
-            message["Subject"] = subject
-            message["Date"] = str(today_date)
-            message.attach(MIMEText(content, "plain"))
-
-            with open(filename, "rb") as attachment:
-                part = MIMEBase("application", "octet-stream")
-                part.set_payload(attachment.read())
-            encoders.encode_base64(part)
-            part.add_header(
-                "Content-Disposition",
-                f"attachment; filename={filename}",
-            )
-
-            # Add attachment to message and convert message to string
-            message.attach(part)
-            text = message.as_string()
-            WebFloorPlanApp.__fire_email(smtp_server, context, password, sender, receiver, text)
-            await asyncio.sleep(1)
-            return True
-        except Exception as e:
-            print(str(e))
-            return False
-
-    @staticmethod
-    def __fire_email(
-            smtp_server: AnyStr,
-            context,
-            password: AnyStr,
-            sender: AnyStr,
-            receiver: AnyStr,
-            text: AnyStr) -> NoReturn:
-        try:
-            with smtplib.SMTP(smtp_server, 587) as server:
-                server.starttls(context=context)
-                server.login('pnicolas57', password)
-                server.sendmail(sender, receiver, text)
-                server.quit()
-        except Exception as e:
-            print(str(e))
-            raise e
-
 
 if __name__ == '__main__':
     import uvicorn

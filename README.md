@@ -46,4 +46,3 @@ The objective is this repository is to evaluate various techniques to extract an
 - Define landing page (menus, ..).   
 - Rename pdf file to be rename (MIME)
 
-
