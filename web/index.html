@@ -1,0 +1,54 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drop File Upload</title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./static/style.css" />
+  </head>
+  <body>
+  <h1>[Logo here] [Company name here]</h1>
+  <table width="100%">
+      <tr><td><hr></td></tr>
+      <tr id="menuId"><td><h3>&nbsp;[menu1]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu2]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu3]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu4]&nbsp;&nbsp;&nbsp; ...</h3></td></tr>
+      <tr><td><hr></td></tr>
+      <tr><td>
+    <div class="container">
+        <center>
+        <div>
+            <h4>Generate procurement log from floor plan</h4><br>
+            <p id="loginDate"></p>
+            <br>
+        </div>
+        <form action='http://localhost:8000/upload/' method="post" name="fileForm" enctype="multipart/form-data">
+            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Choose Or Drop Floor Plan</label>'
+            <input type="file" id="upload-button" name="file" accept="*.pdf" />
+            <table>
+                <tr>
+                    <td><button id="buttonId" type="submit">Send</button></td>
+                    <td><button id="cancelId" type="button" onclick="resetLandingPage();">Cancel</button></td>
+                </tr>
+            </table>
+        </form>
+                 </center>
+      <div id="error"></div>
+      <div id="image-display"></div>
+    </div>
+      </td></tr>
+      </table>
+  <br>
+
+    <!-- Script -->
+      <script src="./static/loadfloorplan.js"></script>
+  </body>
+</html>

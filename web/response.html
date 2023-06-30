@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floor plan upload</title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./static/style.css" />
+  </head>
+  <body>
+    <h1>[Logo here] [Company name here]</h1>
+      <table width="100%">
+      <tr><td><hr></td></tr>
+      <tr id="menuId"><td><h3>&nbsp;[menu1]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu2]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu3]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[menu4]&nbsp;&nbsp;&nbsp; ...</h3></td></tr>
+      <tr><td><hr></td></tr>
+      <tr><td>
+    <div class="container">
+        <center>
+        <div>
+            <h4>Generate procurement log from floor plan</h4><br>
+            <p id="loginDate"></p>
+            <p id="completionDate"></p><br>
+            <img src="./static/procurementlog.png" alt="Example of procurement spreadsheet" height="180" width="280">
+            <h5>Sample procurement spreadsheet format</h5>
+            <br>
+            <form action="/" method="get">
+                <button id="resetId" type="submit">Reset</button>
+            </form>
+
+        </div>
+        </center>
+      <div id="error"></div>
+      <div id="image-display"></div>
+    </div>
+           </td></tr>
+      </table>
+
+    <!-- Script -->
+      <script src="./static/response.js"></script>
+  </body>
+</html>
