@@ -1,13 +1,22 @@
 __author__ = "Patrick Nicolas"
-__copyright__ = "Copyright 2022, 23. All rights reserved."
+__copyright__ = "Copyright 2023. All rights reserved."
 
 from typing import AnyStr, Dict, Optional
 
+
 class TestUtil(object):
     def __init__(self, test_file: AnyStr):
+        """
+        Constructor for the test parameters CSV file
+        :param test_file: Name of the test configuration file
+        """
         self.test_file = test_file
 
     def load_test_variables(self) -> Optional[Dict[AnyStr, AnyStr]]:
+        """
+        Load the test variables as an option of a dictionary
+        :return: Optional dictionary
+        """
         try:
             with open(self.test_file, 'rt') as f:
                 rows = f.read().split("\n")

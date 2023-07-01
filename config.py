@@ -1,16 +1,19 @@
 __author__ = "Patrick Nicolas"
-__copyright__ = "Copyright 2022, 23. All rights reserved."
+__copyright__ = "Copyright 2023. All rights reserved."
 
 from util.ioutil import IOUtil
 
 """
     Wrapper for the configuration of Python application
-    :param config_file_name: Name of the file containing the configuration parameters
 """
 
 
 class Config(object):
     def __init__(self, config_file_name: str = 'conf/config.json'):
+        """
+        Constructor for configuration file
+        :param config_file_name: Name of the JSON file containing the configuration parameters
+        """
         ioutil = IOUtil(config_file_name)
         self.dict = ioutil.to_json()
 

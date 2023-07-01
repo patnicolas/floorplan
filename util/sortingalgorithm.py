@@ -1,5 +1,5 @@
 __author__ = "Patrick Nicolas"
-__copyright__ = "Copyright 2022, 23. All rights reserved."
+__copyright__ = "Copyright 2023. All rights reserved."
 
 from typing import AnyStr, Any, List
 

@@ -5,7 +5,7 @@ import requests
 import time
 import constants
 import urllib3
-from util.decorators import timeit
+import logging
 
 """"
     Simple synchronous implementation of HTTP post using JSON input_tensor line or file. The target can be defined as 
@@ -32,7 +32,7 @@ class HttpPost(object):
                 self.target = predefined_targets[target]
             except KeyError as e:
                 self.target = None
-                constants.log_error(str(e))
+                logging.error(str(e))
         # Otherwise a URL
         else:
             self.target = target
@@ -46,22 +46,19 @@ class HttpPost(object):
         if self.target is not None:
             try:
                 response = requests.post(self.target, data=line, headers=self.headers)
-                constants.log_info("Received ML Response: {}".format(response.status_code))
+                logging.info("Received ML Response: {}".format(response.status_code))
                 if response.status_code == 200:
                     json_response = response.json()
-                    constants.log_info(json_response)
+                    logging.info(json_response)
                     return True
                 else:
-                    constants.log_error(f'Error: {line}')
+                    logging.error(f'Error: {line}')
                     return False
             except urllib3.exceptions.ProtocolError as e:
-                constants.log_error(str(e))
+                logging.error(str(e))
                 return False
             except Exception as e:
-                constants.log_error(str(e))
-                return False
-            except TypeError as e:
-                constants.log_error(str(e))
+                logging.error(str(e))
                 return False
         else:
             return False
@@ -97,41 +94,11 @@ class HttpPost(object):
                         if self.post_single(line):
                             success_count += 1
                         total_count += 1
-                        print(f'Successes: {success_count} Count: {total_count}')
+                        logging.info(f'Successes: {success_count} Count: {total_count}')
                         time.sleep(sleep_time)
         return success_count, total_count
 
 
 predefined_targets = {
-    'predict_local': 'http://127.0.0.1:8080/geminiml/predict',
-    'predict_test': 'http://ip-10-5-60-145.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_stage': 'http://ip-10-5-45-112.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_kafka_stage': 'http://ip-10-5-62-78.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_production': 'http://ip-10-5-35-114.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_training': 'http://ip-10-5-38-237.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_demo': 'http://ip-10-5-53-143.us-east-2.compute.internal:8087/geminiml/predict',
-    'predict_new_api': 'http://ip-10-5-33-98.us-east-2.compute.internal:8087/geminiml/predict',
-    'feedback_local': 'http://localhost:8080/geminiml/feedback',
-    'feedback_test': 'http://ip-10-5-58-7.us-east-2.compute.internal:8087/geminiml/feedback',
-    'feedback_stage': 'http://ip-10-5-45-112.us-east-2.compute.internal:8087/geminiml/feedback',
-    'feedback_production': 'http://ip-10-5-59-20.us-east-2.compute.internal:8087/geminiml/feedback',
-    'feedback_training': 'http://ip-10-5-38-237.us-east-2.compute.internal:8087/geminiml/feedback',
-    'virtual_coder_stage': 'http://vc-enm-stage.private.aideo-tech.com/api/enm',
-    'virtual_coder_production': 'https://virtual-coder.aideo-tech.com/api'
 }
 
-
-def main(args: list):
-    new_headers = {'Content-type': 'application/json'}
-    target = args[0]
-    is_predefined_target = args[1]
-    input_file = args[2]
-    post = HttpPost(target, new_headers, is_predefined_target)
-    successes, total = post.post_batch(input_file)
-    constants.log_info(f'Successes: {successes} All counts {total}')
-
-
-import sys
-
-if __name__ == "__main__":
-    main(sys.argv[1:])

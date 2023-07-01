@@ -2,6 +2,7 @@ import polars as pl
 from polars import Expr
 
 """
+    Class to evaluate polars
     Reference: https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api
 """
 
