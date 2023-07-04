@@ -29,12 +29,38 @@ The objective is this repository is to evaluate various techniques to extract an
 | langchain    | 0.0.2   |
 | polars       | 0.17.0  |
 | fastapi      | 0.97.0  |
+| uvicorn      | 0.22.0  |
+| requests     | 2.31.0  |
+| pydantic     | 1.10.9  |
+| jinja2       | 3.1.2.  |
 
 
-## Updates
+## Versions
 | Date       | Version |
 |:-----------|:--------|
 | 06.27.2023 | 0.1     |
+
+
+## Deployment
+```
+pip install -r requirements
+
+pandas~=2.0.2
+boto3~=1.26.149
+requests~=2.31.0
+urllib3~=1.26.16
+polars~=0.18.2
+cryptography~=41.0.1
+fastapi~=0.96.0
+pydantic~=1.10.9
+jinja2~=3.1.2
+uvicorn~=0.22.0 
+
+```
+_Cost estimate_:     
+- AWS ~15/20cents hour with a or t4 instances (~$110/mo).   
+- GoDaddy  Dedicated server ($145/mo).     
+
 
 
 ## Todo list
@@ -44,5 +70,11 @@ The objective is this repository is to evaluate various techniques to extract an
 - Fix issue with drag-drop file with UploadFile.   
 - Select a target email.   
 - Define landing page (menus, ..).   
-- Rename pdf file to be rename (MIME)
+- Rename pdf file to be rename (MIME).    
+- Define command line arguments. argparse.ArgumentParser.     
+- Investigate ChatGPT-based PDF parsing https://github.com/brandonrobertz/chatgpt-document-extraction/tree/main.    
+- Investigate detection and extraction of key widgets/components.       
+
+
+
 
