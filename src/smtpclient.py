@@ -41,7 +41,7 @@ class SmtpClient(object):
         :param csv_config_file:  Absolute path for configuration file
         :return: Instance of SMTP client
         """
-        from util.testutil import TestUtil
+        from src.util.testutil import TestUtil
 
         test_util = TestUtil(csv_config_file)
         test_variables = test_util.load_test_variables()
@@ -123,7 +123,7 @@ class SmtpClient(object):
 
 
 if __name__ == '__main__':
-    smtp_client = SmtpClient.build_from_conf('test_input/test.csv')
+    smtp_client = SmtpClient.build_from_conf('../test_input/test.csv')
     test_sender = 'pnicolas57@yahoo.com'
     test_attachment = 'floorplans/test.pdf'
     asyncio.run(smtp_client.send_email_with_attachment(test_sender, test_attachment))

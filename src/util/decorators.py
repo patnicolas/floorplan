@@ -2,7 +2,6 @@ __author__ = "Patrick Nicolas"
 __copyright__ = "Copyright 2023. All rights reserved."
 
 import time
-import constants
 
 
 def timeit(func):

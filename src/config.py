@@ -1,7 +1,7 @@
 __author__ = "Patrick Nicolas"
 __copyright__ = "Copyright 2023. All rights reserved."
 
-from util.ioutil import IOUtil
+from util import IOUtil
 
 """
     Wrapper for the configuration of Python application

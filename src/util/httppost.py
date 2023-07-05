@@ -3,7 +3,6 @@ __copyright__ = "Copyright 2022, 23. All rights reserved."
 
 import requests
 import time
-import constants
 import urllib3
 import logging
 

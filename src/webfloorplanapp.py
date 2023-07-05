@@ -6,8 +6,6 @@ from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-import smtplib, ssl
-import asyncio
 from pydantic import BaseModel
 from typing import AnyStr, Optional, NoReturn
 
@@ -71,7 +69,7 @@ class WebFloorPlanApp(object):
             with open(new_file, "wb") as buffer:
                 shutil.copyfileobj(file.file, buffer)
 
-            smtp_client = SmtpClient.build_from_conf('test_input/test.csv')
+            smtp_client = SmtpClient.build_from_conf('../test_input/test.csv')
             smtp_client.send_email_with_attachment('pnicolas57@yahoo.com', new_file)
 
             return WebFloorPlanApp.templates.TemplateResponse("response.html", {"request": request}, 200)

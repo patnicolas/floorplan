@@ -1,3 +1,6 @@
+__author__ = "Patrick Nicolas"
+__copyright__ = "Copyright 2023. All rights reserved."
+
 import polars as pl
 from polars import Expr
 
@@ -43,5 +46,3 @@ if __name__ == '__main__':
     print(str(polar_eval))
     condition_age: Expr = pl.col("age") > 18
     print(str(polar_eval.query(['name', 'age'], condition_age)))
-
-    # print(polar_eval.df.filter(pl.col("age") > 18))

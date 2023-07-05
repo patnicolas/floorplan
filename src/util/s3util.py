@@ -7,7 +7,7 @@ from typing import Optional
 import boto3
 import pandas as pd
 from pandas import json_normalize
-import constants
+from src import constants
 import pickle
 from collections import OrderedDict
 

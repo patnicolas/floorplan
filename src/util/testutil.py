@@ -34,6 +34,6 @@ class TestUtil(object):
 
 
 if __name__ == '__main__':
-    test_util = TestUtil('../test_input/test.csv')
+    test_util = TestUtil('../../test_input/test.csv')
     dictionary = test_util.load_test_variables()
     print(str(dictionary))
