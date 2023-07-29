@@ -1,7 +1,9 @@
 
 
 def eval1():
+    
     a = [1, 2, 3, 4]
+    print(a[1:4])
     print(a[-2:])  # [3, 4]
     print(a[:-2])  # [1 , 2]
     a[:] = a[-2:] + a[:-2]
@@ -29,6 +31,58 @@ def eval1():
         print(str(e))
 
 
+def eval2():
+    import numpy as np
+    x = np.random.rand(4, 5)
+    y = np.sum(x, axis=1)
+    print (str(y.shape))
+
+
+def eval3(value, lst):
+    lst.append(value)
+    return list
+
+
 if __name__ == '__main__':
-    eval1()
-    
+    import torch
+    x = torch.rand(4, 4).to('mps')
+    print(x)
+    print(int(3 & 1))
+    def foo():
+        try:
+            return 1
+        finally:
+            return 2
+    k = foo()
+    print(k)
+
+
+    l1 = [1, 5, 6, 9]
+    l2 = l1
+    l3 = [1, 5, 6, 9]
+    print(l1 is l3)
+    print(l1 == l3)
+
+    h = 'hacked'
+    print(h[1:12])
+    print(h[1:9][1:3])
+
+    import numpy as np
+
+    x = 2
+    z = ++x
+    print(f"++x {z}")
+    y = x*z
+    print(f"x: {x}")
+    for i in range(3):
+        print(f'i: {++i}')
+    def multipliers():
+        return [lambda x:i*x for i in range(4)]
+    print([m(2) for m in multipliers()])    # [6, 6, 6, 6]
+
+    x = np.zeros((3, 4))
+    print(x.shape)
+    v = np.random.randn((x.shape[0]))
+    print(v.shape)
+
+

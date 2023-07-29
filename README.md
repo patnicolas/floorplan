@@ -63,6 +63,13 @@ _Cost estimate_:
 
 
 
+## Modeling
+The process of generating bill of material from floor plan can be described in a sequence of 5 models as follows:     
+
+![Modeling sequence](images/Floorplan-Neural-Models.png)
+
+
+
 ## Todo list
 - Generate and test requirements.txt file.    
 - Specify copyright.     
