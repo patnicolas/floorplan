@@ -21,5 +21,4 @@ pyOpenSSL==23.2.0
 toml==0.10.2
 tornado==6.3.2
 uvicorn==0.23.2
-xmlrpclib==1.0.1
 zipp==3.16.2
