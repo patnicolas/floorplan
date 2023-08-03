@@ -1,4 +1,4 @@
-### Patrick Nicolas - Last update 06.28.2023
+### Patrick Nicolas - Last update 07.28.2023
 
 ![Topology Graph Neural Network for floor plans](images/background.png)
 
@@ -57,9 +57,13 @@ jinja2~=3.1.2
 uvicorn~=0.22.0 
 
 ```
-_Cost estimate_:     
-- AWS ~15/20cents hour with a or t4 instances (~$110/mo).   
-- GoDaddy  Dedicated server ($145/mo).     
+_Deployment/hosting_.     
+The minimum requirements are support for FastAPI Web interface and PostgreSQL
+- Heroku/Production-standard (https://www.heroku.com/pricing).  $25/mo      
+- PythonAnyWhere  https://www.pythonanywhere.com/batteries_included/    $15-$35/mo.        
+- AWS/Elastic Beanstalk.     
+- DigitalOcean.     
+- Linode.     
 
 
 

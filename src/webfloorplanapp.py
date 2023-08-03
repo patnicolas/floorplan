@@ -33,7 +33,7 @@ class WebFloorPlanApp(object):
     app = FastAPI()
     app.mount(
         "/static",
-        StaticFiles(directory=Path(__file__).parent.parent.absolute() / "./floorplan/web/static"),
+        StaticFiles(directory=Path(__file__).parent.parent.absolute() / "./src/web/static"),
         name="static",
     )
     """ Instantiate JinJa2 template for Request and Response a static variable"""
@@ -80,4 +80,4 @@ class WebFloorPlanApp(object):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(WebFloorPlanApp.app, host='localhost', port=8000, log_level="debug")
+    uvicorn.run(WebFloorPlanApp.app, host='localhost', port=8080, log_level="debug")

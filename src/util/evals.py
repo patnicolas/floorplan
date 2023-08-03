@@ -44,10 +44,25 @@ def eval3(value, lst):
 
 
 if __name__ == '__main__':
-    import torch
-    x = torch.rand(4, 4).to('mps')
-    print(x)
-    print(int(3 & 1))
+    for i in [1, 2, 3, 4][::-1]:
+        print(i)
+
+
+    xlist = [4, 8, 12, 16]
+    xlist[1:4] = [20, 24, 28]
+    print(xlist)
+
+    modify_tuple = lambda t: t + (4, 5)
+    my_tuple = (1, 2, 3)
+    modify_tuple(my_tuple)
+    print(my_tuple)
+    def other_tuple(p) -> tuple:
+        return p + (4, 5)
+
+    print((1, 2) + (3, 4))
+    print(other_tuple((1, 2, 3)))
+
+
     def foo():
         try:
             return 1
