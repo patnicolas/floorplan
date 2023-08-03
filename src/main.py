@@ -89,7 +89,9 @@ templates = Jinja2Templates(directory="./web")
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    with open("web/index.html", 'r') as f:
+    import os
+    print(f'Current directory: {os.getcwd()}')
+    with open("./web/index.html", 'r') as f:
         html_content = f.read()
     print("loaded index.html")
     return html_content
