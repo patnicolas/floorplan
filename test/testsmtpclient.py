@@ -5,7 +5,7 @@ import asyncio
 
 class TestSmtpClient(TestCase):
     def test_smtp_with_attachment(self):
-        test_script_file = '../test_input/test.csv'
+        test_script_file = '../config.csv'
         smtp_client = SmtpClient.build_from_conf(test_script_file)
         test_sender = 'pnicolas57@yahoo.com'
         test_attachment = '../floorplans/test.pdf'

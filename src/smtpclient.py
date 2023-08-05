@@ -4,7 +4,6 @@ __copyright__ = "Copyright 2023. All rights reserved."
 from typing import AnyStr, NoReturn, TypeVar
 import os
 import smtplib, ssl
-import asyncio
 
 Instancetype = TypeVar('Instancetype', bound='SmtpClient')
 
@@ -35,23 +34,30 @@ class SmtpClient(object):
         self.receiver = receiver
 
     @classmethod
-    def build_from_conf(cls, csv_config_file: AnyStr) -> Instancetype:
+    def build_from_conf(cls) -> Instancetype:
         """
         Build a SMTP client from a CSV configuration file
-        :param csv_config_file:  Absolute path for configuration file
         :return: Instance of SMTP client
         """
-        from src.util.testutil import TestUtil
+        from util.configutil import configuration_parameters
+        is_test: bool = bool(configuration_parameters['is_test'] == 'True')
+        if is_test:
+            email_pwd = configuration_parameters['test_email_password_key']
+            return cls(
+                    configuration_parameters['test_smtp_server'],
+                    configuration_parameters['test_email_name'],
+                    email_pwd,
+                    configuration_parameters['test_receiver'])
+        else:
+            email_pwd = configuration_parameters['email_password_key']
+            email_pwd = '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'
+            return cls(
+                configuration_parameters['smtp_server'],
+                configuration_parameters['email_name'],
+                email_pwd,
+                configuration_parameters['email_receiver'])
 
-        test_util = TestUtil(csv_config_file)
-        test_variables = test_util.load_test_variables()
-        return cls(
-                test_variables['test_smtp_server'],
-                test_variables['test_email_name'],
-                test_variables['test_email_password_key'],
-                test_variables['test_receiver'])
-
-    async def send_email_with_attachment(self, sender: AnyStr, attached_filename: AnyStr) -> bool:
+    def send_email_with_attachment(self, sender: AnyStr, attached_filename: AnyStr) -> bool:
         """
         Generate and send an email with attachment using parameters defined in the constructor, sender and
         attachment defined as arguments
@@ -75,7 +81,7 @@ class SmtpClient(object):
             message["To"] = self.receiver
             message["Subject"] = subject
             message["Date"] = str(today_date)
-            message.attach(MIMEText(content, "plain"))
+            message.attach(MIMEText(content, "html"))
 
             # Step 2: Load the attachment
             with open(attached_filename, "rb") as attachment:
@@ -97,10 +103,10 @@ class SmtpClient(object):
 
             # Step 6: Fire/send email before a asynchronous sleep
             self.__fire_email(sender, text)
-            await asyncio.sleep(1)
+            # asyncio.sleep(2)
             return True
         except Exception as e:
-            print(str(e))
+            print(f'ERROR: {str(e)}')
             return False
 
         # ------------------  Helper methods ----------------------------
@@ -118,13 +124,13 @@ class SmtpClient(object):
                 server.sendmail(sender, self.receiver, text)
                 server.quit()
         except Exception as e:
-            print(str(e))
+            print(f'ERROR: {str(e)}')
             raise e
 
 
 if __name__ == '__main__':
-    smtp_client = SmtpClient.build_from_conf('../test_input/test.csv')
+    smtp_client = SmtpClient.build_from_conf(True)
     test_sender = 'pnicolas57@yahoo.com'
-    test_attachment = 'floorplans/test.pdf'
-    asyncio.run(smtp_client.send_email_with_attachment(test_sender, test_attachment))
+    test_attachment = '../../floorplans/test.pdf'
+    smtp_client.send_email_with_attachment(test_sender, test_attachment)
 

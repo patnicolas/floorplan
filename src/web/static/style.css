@@ -16,9 +16,10 @@ h1 {
     background-color:white;
 }
 body {
-  background-image: url("background.jpg");
-  background-repeat: no-repeat, repeat;
-  background-color: #cccccc;
+  background-image: url("background_img.jpg");
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: auto;
 }
 #loginDate {
    position: relative;
@@ -35,14 +36,14 @@ body {
 .container {
   background-color: #ffffff;
   width: 40%;
-  min-width: 24.5em;
-  padding: 2.12em 1.87em;
+  min-width: 28.5em;
+  padding: 1.6em 2.87em;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
-  top: 50%;
+  top: 60%;
   box-shadow: 0 1.25em 3.43em rgba(0, 0, 0, 0.08);
-  border-radius: 0.5em;
+  border-radius: 2.0em;
 }
 input[type="file"] {
   display: none;
@@ -51,7 +52,7 @@ label {
   display: block;
   position: relative;
   background-color:lightgrey;
-  color:black;
+  color:red;
   font-size: 0.8em;
   text-align: center;
   width: 16em;
@@ -71,7 +72,7 @@ label {
   flex-wrap: wrap;
 }
 #image-display figure {
-  width: 65%;
+  width: 70%;
 }
 #image-display img {
   width: 100%;

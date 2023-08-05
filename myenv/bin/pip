@@ -1,4 +1,4 @@
-#!/Users/patricknicolas/dev/floorplan/myenv/bin/python3
+#!/Users/patricknicolas/dev/floorplan/myenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,4 +1,4 @@
-### Patrick Nicolas - Last update 07.28.2023
+### Patrick Nicolas - Last update 08.04.2023
 
 ![Topology Graph Neural Network for floor plans](images/background.png)
 
@@ -68,9 +68,10 @@ The minimum requirements are support for FastAPI Web interface and PostgreSQL
 
 
 ## Modeling
-The process of generating bill of material from floor plan can be described in a sequence of 5 models as follows:     
-
+There are several options to generate a bill of material from floor plan:     
+- Direct image processing using a sequence of convolutional neural network and graph convolutional neural networks:    
 ![Modeling sequence](images/Floorplan-Neural-Models.png)
+- Generative AI: Convert grayscale and predefined shape of pixels into vocabulary for fine tuning of a large language model such as GPT or LLMA
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drag & Drop File Upload</title>
+    <title>Floor plan processor</title>
     <!-- Font Awesome Icons -->
     <link
       rel="stylesheet"
@@ -17,7 +17,11 @@
     <link rel="stylesheet" href="./static/style.css" />
   </head>
   <body>
-  <h1>Selections.ai</h1>
+  <center>
+  <table>
+      <tr><td style="vertical-align:bottom;"><h1>Selections.ai</h1></td><td style="vertical-align:bottom;"><h4>&nbsp;&nbsp;&nbsp;&#169; 2023 - All rights reserved</h4></td></tr>
+  </table>
+      </center>
   <table width="100%">
       <tr><td><hr></td></tr>
       <tr id="menuId"><td><h3>&nbsp;Company&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Help&nbsp;&nbsp;</h3></td></tr>
@@ -29,9 +33,13 @@
             <h4>Generate procurement log from floor plan</h4><br>
             <p id="loginDate"></p>
             <br>
+
+
         </div>
         <form action='http://localhost:8080/upload/' method="post" name="fileForm" enctype="multipart/form-data">
-            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Choose Or Drop Floor Plan</label>'
+            username : <input id="username_id" type="text" name="username" style="color:red; width:14em; text-align:left;font-size: 0.8em;background-color:lightgrey;padding: 0.2em 0.2em;font-style: italic;" /><br><br>
+            email : <input id="email_id" type="email" name="email" style="color:red; width:16.3em; text-align:left;font-size: 0.8em;background-color:lightgrey;padding: 0.2em 0.2em;font-style: italic;" value="email@domain.com"/><br><br>
+            <label for="upload-button"><i class="fa-solid fa-upload"></i>&nbsp; Load Floor Plan</label>'
             <input type="file" id="upload-button" name="file" accept="*.pdf" />
             <table>
                 <tr>
@@ -49,6 +57,6 @@
   <br>
 
     <!-- Script -->
-      <script src="./static/loadfloorplan.js"></script>
+      <script type="text/javascript" src="./static/loadfloorplan.js"></script>
   </body>
 </html>

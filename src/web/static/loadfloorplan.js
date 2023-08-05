@@ -8,6 +8,8 @@ let container = document.querySelector(".container");
 let error = document.getElementById("error");
 let imageDisplay = document.getElementById("image-display");
 let input = document.querySelector('input[type="file"]')
+let username = document.getElementById("username_id")
+let email = document.getElementById("email_id")
 
 
 const fileHandler = (file, name, type) => {
@@ -19,14 +21,15 @@ const fileHandler = (file, name, type) => {
   error.innerText = "";
   let reader = new FileReader();
   reader.readAsDataURL(file);
+
   reader.onloadend = () => {
     //image and file name
+    user_name = username.value
     let imageContainer = document.createElement("figure");
-    let img = document.createElement("img");
-    img.setAttribute("id", "fileSource")
-    img.src = reader.result;
-    imageContainer.appendChild(img);
-    imageContainer.innerHTML += `<figcaption>File: ${name}</figcaption>`;
+    let embed = document.createElement("embed");
+    embed.src = reader.result;
+    imageContainer.appendChild(embed);
+    imageContainer.innerHTML += `<figcaption>From: ${user_name}  File: ${name}</figcaption>`;
     imageDisplay.appendChild(imageContainer);
     displaySubmit("block")
   };
@@ -35,14 +38,16 @@ const fileHandler = (file, name, type) => {
 
 const displayDate = (dateType) => {
     let loginDateP = document.getElementById(dateType);
-    const today = (dateType == "loginDate") ? new Date() : new Date(Date.now() + 1000*60*60*24*2);
-    const month = today.getMonth() +1;
-    const day = today.getDate();
-    const year = today.getFullYear();
-    const time = today.toLocaleTimeString('en-US');
+    if (loginDateP) {
+        const today = (dateType == "loginDate") ? new Date() : new Date(Date.now() + 1000*60*60*24*2);
+        const month = today.getMonth() +1;
+        const day = today.getDate();
+        const year = today.getFullYear();
+        const time = today.toLocaleTimeString('en-US');
 
-    const comment = (dateType == "loginDate") ? "Login date/time:" : "Completion date:";
-    loginDateP.innerHTML = comment + '&nbsp;&nbsp;&nbsp;' + month + '/' + day + '/' + year + ' ' + time + ' PST'
+        const comment = (dateType == "loginDate") ? "Login date/time:" : "Completion date:";
+        loginDateP.innerHTML = comment + '&nbsp;&nbsp;&nbsp;' + month + '/' + day + '/' + year + ' ' + time + ' PST'
+    }
 };
 
 

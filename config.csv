@@ -1,0 +1,14 @@
+is_test,False
+test_sender,pnicolas57@yahoo.com
+test_receiver,pnicolas57@yahoo.com
+test_email_name,pnicolas57
+test_smtp_server,smtp.mail.yahoo.com
+test_email_password_key,YAHOO_APP_KEY
+email_sender,patrick@selections.ai
+email_receiver,patrick@selections.ai
+email_name,Patrick Nicolas
+smtp_server,smtp.gmail.com
+email_password_key,SELECTIONS_AI_PWD
+web_path,./web
+floor_plans_path,../floorplans
+port,8080
