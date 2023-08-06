@@ -55,9 +55,15 @@ class GmailClient(object):
                 token.write(credentials.to_json())
         self.service = build('gmail', 'v1', credentials=credentials)
 
-    def send(self, sender: AnyStr, attachment: AnyStr):
+    def send(self, sender: AnyStr, username: AnyStr, email: AnyStr, attachment: AnyStr) -> None:
+        self.__notify_company(sender, username, email, attachment)
+        self.__notify_sender(sender, attachment)
+
+        # -------------  Supporting/Helper methods ------------------------
+
+    def __notify_company(self, sender: AnyStr, username: AnyStr, email: AnyStr, attachment: AnyStr) -> None:
         try:
-            subject, content = GmailClient.__message_content(attachment)
+            subject, content = GmailClient.__notification_content(username, email, attachment)
 
             message = EmailMessage()
             message.set_content(content)
@@ -79,10 +85,29 @@ class GmailClient(object):
         except HttpError as error:
             print(f'An error occurred: {error}')
 
+    def __notify_sender(self, sender: AnyStr, attachment: AnyStr):
+        subject, content = GmailClient.__acknowledgment_message(attachment)
+
+        message = EmailMessage()
+        message.set_content(content)
+        message['From'] = configuration_parameters['email_receiver']
+        message['To'] = sender
+        message['Subject'] = subject
+
+        create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+        message = (self.service.users().messages().send(userId="me", body=create_message).execute())
+        print(f'sent message to {message} Message Id: {message["id"]}')
+
     @staticmethod
-    def __message_content(filename: AnyStr) -> (AnyStr, AnyStr):
-        subject = f"""Subject: Floor plan {filename} uploaded!"""
-        content = f"""A new floor plan has been uploaded as {filename} into directory floorplan/floorplans\n\n"""
+    def __notification_content(user_name: AnyStr, email: AnyStr, filename: AnyStr) -> (AnyStr, AnyStr):
+        subject = f"""Subject: Floor plan {filename} from {user_name} uploaded!"""
+        content = f"""A new floor plan {filename} has been uploaded by {user_name} / {email} and attached to this email.\nA back up of the floor plan is stored at floorplan/floorplans\n\n"""
+        return subject, content
+
+    @staticmethod
+    def __acknowledgment_message(filename: AnyStr) -> (AnyStr, AnyStr):
+        subject = f"""Subject: Floor plan {filename} has been uploaded!"""
+        content = f"""Your floor plan {filename} has been uploaded to Selections.ai\nFuture communication will use this email\nContact support@selections.ai for any questions\n\nWe appreciate your support"""
         return subject, content
 
 

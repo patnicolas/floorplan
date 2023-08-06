@@ -1,7 +1,8 @@
 ### Patrick Nicolas - Last update 08.04.2023
+    
+
 
 ![Topology Graph Neural Network for floor plans](images/background.png)
-
 
 
 
@@ -12,6 +13,17 @@ The objective is this repository is to evaluate various techniques to extract an
 - [Parsing Line Segments of Floor Plan Images Using Graph Neural Networks](https://arxiv.org/pdf/2303.03851.pdf).  
 - [Extracting real estate values of rental apartment floor plans using graph convolutional networks](https://arxiv.org/pdf/2303.13568.pdf).   
 - [Room semantics inference using random forest and relational graph convolutional networks](https://onlinelibrary.wiley.com/doi/epdf/10.1111/tgis.12664).  
+
+
+## Data flow
+Here are the steps to upload floor plan and generate procurement log:      
+1 **User** enters name and email address.    
+2 **User** uploads floor plan as PDF file.    
+3a  **System** fires email to Selection.AI with user name, email and attached floor plan.     
+3b  **System** notifies sender/user the floor plan has been received with an estimated completion date.    
+...    
+4 **Company** generates procurement log.     
+5 **Systems** fires email to user with attached procurement log.    
 
 
 
@@ -73,7 +85,8 @@ There are several options to generate a bill of material from floor plan:
 ![Modeling sequence](images/Floorplan-Neural-Models.png)
 - Generative AI: Convert grayscale and predefined shape of pixels into vocabulary for fine tuning of a large language model such as GPT or LLMA
 
-
+## Copyrights
+![Coyright notice](images/selections.ai-logo.png)
 
 ## Todo list
 - Generate and test requirements.txt file.    

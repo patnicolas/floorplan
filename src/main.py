@@ -23,8 +23,8 @@ class FileOptions(BaseModel):
 
 """
     Implement the web service to handle HTTP requests
-    http://dns_name:8000/  for landing page defined as index.html
-    http://dns_name:8000/upload for the upload page defined as response.html
+    http://dns_name:{port}/  for landing page defined as index.html
+    http://dns_name:{port}/upload for the upload page defined as response.html
 """
 
 app = FastAPI()
@@ -55,7 +55,12 @@ async def upload(
         username: str = Form(...),
         email: str = Form(...),
         file: UploadFile = File(...)):
-    """"""
+    """
+        @param request  Request meta data
+        @param username User name file defined in the form (INPUT text)
+        @param email Email addressed defined in the HTML form (Input email)
+        @param file Handle to the uploaded file.
+    """
     try:
         import shutil
         from smtpclient import SmtpClient

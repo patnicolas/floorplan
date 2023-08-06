@@ -11,7 +11,9 @@ let input = document.querySelector('input[type="file"]')
 let username = document.getElementById("username_id")
 let email = document.getElementById("email_id")
 
-
+/**
+   Function handler for loading the file
+*/
 const fileHandler = (file, name, type) => {
   if (type.split("/")[1] !== "pdf") {
     //File Type Error
@@ -21,7 +23,7 @@ const fileHandler = (file, name, type) => {
   error.innerText = "";
   let reader = new FileReader();
   reader.readAsDataURL(file);
-
+    // Load and embed an image of the PDF file in the container area
   reader.onloadend = () => {
     //image and file name
     user_name = username.value
