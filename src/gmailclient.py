@@ -129,7 +129,7 @@ class GmailClient(object):
                                 'https://mail.google.com/',
                                 'https://www.googleapis.com/auth/gmail.send']
         gmail_token_json = json.dumps(gmail_vars)
-        with open('tok.json', 'wt') as f:
+        with open('token.json', 'wt') as f:
             f.write(gmail_token_json)
 
 

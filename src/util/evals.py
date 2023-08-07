@@ -44,9 +44,14 @@ def eval3(value, lst):
 
 
 if __name__ == '__main__':
+    import numpy as np
+    np.random.seed(1)
+    x = np.random.randn(4, 3, 3, 2)
+    pad = 3
+    X_pad = np.pad(x, ((0, 0), (0, 2 * pad), (0, 2 * pad), (0, 0)), mode='constant', constant_values=(0, 0))
+    print(X_pad)
     for i in [1, 2, 3, 4][::-1]:
         print(i)
-
 
     xlist = [4, 8, 12, 16]
     xlist[1:4] = [20, 24, 28]

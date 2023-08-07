@@ -5,12 +5,14 @@ from typing import AnyStr
 
 
 class KeyEncryption(object):
+    import os
     """
         Encrypt and decrypt a key through a Fernet generator. The encrypted key is encoded
         as an array of bytes.
     """
     # key = Fernet.generate_key()
-    key = b'D1huLCayW6GbZat2UPLmdYrDASuov1ccN_6q9l1F_io='
+
+    key = os.environ['FERNET_KEY']
     fernet = Fernet(key)
 
     def encrypt(self, key: AnyStr) -> bytes:
