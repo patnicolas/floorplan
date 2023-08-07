@@ -72,10 +72,10 @@ async def upload(
             shutil.copyfileobj(file.file, buffer)
 
         # Send the notification message and attachment to SMTP server
-        gmail_client = GmailClient('credentials.json')
+        gmail_client = GmailClient()
         email_sender = configuration_parameters['test_sender'] if configuration_parameters['is_test'] \
             else configuration_parameters['email_sender']
-        gmail_client.send(email_sender, new_file)
+        gmail_client.send(email_sender, username, email, new_file)
 
         return templates.TemplateResponse("response.html", {"request": request}, 200)
     except Exception as e:

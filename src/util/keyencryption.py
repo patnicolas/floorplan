@@ -42,7 +42,24 @@ class KeyEncryption(object):
 
 
 if __name__ == '__main__':
-    key_encryption = KeyEncryption()
+    import json
+    import os
+    keys = ['TOKEN','REFRESH_TOKEN', 'TOKEN_URI', 'CLIENT_ID', 'CLIENT_SECRET', 'EXPIRY']
+    gmail_vars = { k.lower(): v for k, v in os.environ.items() if k in keys}
+    gmail_vars['scopes'] = ['https://www.googleapis.com/auth/gmail.compose',
+    'https://www.googleapis.com/auth/gmail.modify',
+    'https://mail.google.com/',
+    'https://www.googleapis.com/auth/gmail.send']
+    gmail_token_json = json.dumps(gmail_vars)
+    with open('tok.json', 'wt') as f:
+        f.write(gmail_token_json)
+
+
+
+
+
+
+    # key_encryption = KeyEncryption()
     """
     test_key = "This is not a good day!j"
     encrypted = key_encryption.encrypt(test_key)
@@ -51,4 +68,4 @@ if __name__ == '__main__':
     """
 
     # key_encryption.encrypt_file('../creds.json', '../encrypted_credentials')
-    key_encryption.decrypt_file('../encrypted_credentials', '../credsx.json')
+    # key_encryption.decrypt_file('../encrypted_credentials', '../credsx.json')

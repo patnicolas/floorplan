@@ -4,6 +4,8 @@ __author__ = "Patrick Nicolas"
 __copyright__ = "Copyright 2023. All rights reserved."
 
 import os.path
+import time
+
 from util.configutil import configuration_parameters
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -34,7 +36,7 @@ SCOPES = [
 
 
 class GmailClient(object):
-    def __init__(self, credential_file: AnyStr):
+    def __init__(self, credential_file: AnyStr = None):
         credentials = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first time
@@ -42,17 +44,23 @@ class GmailClient(object):
             credentials = Credentials.from_authorized_user_file('token.json', SCOPES)
         # If there are no (valid) credentials available, let the user log in.
         if not credentials or not credentials.valid:
-            if credentials and credentials.expired and credentials.refresh_token:
-                credentials.refresh(Request())
+            if not credential_file:
+                GmailClient.__decrypt_token()
+                # We need to sleep this thread to allow the token file to be written
+                time.sleep(3)
+                credentials = Credentials.from_authorized_user_file('token.json', SCOPES)
             else:
-                # To be safe we load the encrypted GMAIL credentials from local file.
-                key_encryption = KeyEncryption()
-                key_encryption.decrypt_file('encrypted_credentials', credential_file)
-                flow = InstalledAppFlow.from_client_secrets_file(credential_file, SCOPES)
-                credentials = flow.run_local_server(port=0)
-            # Save the credentials for the next run
-            with open('token.json', 'w') as token:
-                token.write(credentials.to_json())
+                if credentials and credentials.expired and credentials.refresh_token:
+                    credentials.refresh(Request())
+                else:
+                    # To be safe we load the encrypted GMAIL credentials from local file.
+                    key_encryption = KeyEncryption()
+                    key_encryption.decrypt_file('encrypted_credentials', credential_file)
+                    flow = InstalledAppFlow.from_client_secrets_file(credential_file, SCOPES)
+                    credentials = flow.run_local_server(port=0)
+                # Save the credentials for the next run
+                with open('token.json', 'w') as token:
+                    token.write(credentials.to_json())
         self.service = build('gmail', 'v1', credentials=credentials)
 
     def send(self, sender: AnyStr, username: AnyStr, email: AnyStr, attachment: AnyStr) -> None:
@@ -110,8 +118,22 @@ class GmailClient(object):
         content = f"""Your floor plan {filename} has been uploaded to Selections.ai\nFuture communication will use this email\nContact support@selections.ai for any questions\n\nWe appreciate your support"""
         return subject, content
 
+    @staticmethod
+    def __decrypt_token():
+        import json
+        import os
+        keys = ['TOKEN', 'REFRESH_TOKEN', 'TOKEN_URI', 'CLIENT_ID', 'CLIENT_SECRET', 'EXPIRY']
+        gmail_vars = {k.lower(): v for k, v in os.environ.items() if k in keys}
+        gmail_vars['scopes'] = ['https://www.googleapis.com/auth/gmail.compose',
+                                'https://www.googleapis.com/auth/gmail.modify',
+                                'https://mail.google.com/',
+                                'https://www.googleapis.com/auth/gmail.send']
+        gmail_token_json = json.dumps(gmail_vars)
+        with open('tok.json', 'wt') as f:
+            f.write(gmail_token_json)
+
 
 if __name__ == '__main__':
-    gmail_client = GmailClient('credentials.json')
+    gmail_client = GmailClient()
     gmail_client.send('patrick@selections.ai', '../floorplans/test.pdf')
 
