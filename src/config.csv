@@ -9,6 +9,6 @@ email_receiver,patrick@selections.ai
 email_name,Patrick Nicolas
 smtp_server,smtp.gmail.com
 email_password_key,SELECTIONS_AI_PWD
-web_path,./web
-floor_plans_path,../floorplans
+web_path,src/web
+floor_plans_path,src/floorplans
 port,8080
