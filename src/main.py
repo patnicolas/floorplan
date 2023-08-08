@@ -37,6 +37,7 @@ app.mount(
 # templates = Jinja2Templates(directory="./web")
 templates = Jinja2Templates(directory="./src/web")
 
+
 @app.get("/", response_class=HTMLResponse)
 async def root():
     import os
@@ -77,10 +78,10 @@ async def upload(
             else configuration_parameters['email_sender']
         gmail_client.send(email_sender, username, email, new_file)
 
-        return templates.TemplateResponse("web/response.html", {"request": request}, 200)
+        return templates.TemplateResponse("response.html", {"request": request}, 200)
     except Exception as e:
         print(f'ERROR: {str(e)}')
-        return templates.TemplateResponse("response.html", {"request": request}, 400)
+        return templates.TemplateResponse("response.html", {"request": request}, 500)
 
 
 if __name__ == '__main__':

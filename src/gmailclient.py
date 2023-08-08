@@ -12,6 +12,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+import sys
 import base64
 from src.util.keyencryption import KeyEncryption
 from email.message import EmailMessage
@@ -66,6 +67,7 @@ class GmailClient(object):
     def send(self, sender: AnyStr, username: AnyStr, email: AnyStr, attachment: AnyStr) -> None:
         self.__notify_company(sender, username, email, attachment)
         self.__notify_sender(sender, attachment)
+        time.sleep(2)
 
         # -------------  Supporting/Helper methods ------------------------
 
@@ -89,22 +91,29 @@ class GmailClient(object):
 
             create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
             message = (self.service.users().messages().send(userId="me", body=create_message).execute())
-            print(f'sent message to {message} Message Id: {message["id"]}')
+            print(f'Notify Selections.ai from {sender} Message Id: {message["id"]}')
+            sys.stdout.flush()
         except HttpError as error:
             print(f'An error occurred: {error}')
+            sys.stdout.flush()
 
     def __notify_sender(self, sender: AnyStr, attachment: AnyStr):
-        subject, content = GmailClient.__acknowledgment_message(attachment)
+        try:
+            subject, content = GmailClient.__acknowledgment_message(attachment)
 
-        message = EmailMessage()
-        message.set_content(content)
-        message['From'] = configuration_parameters['email_receiver']
-        message['To'] = sender
-        message['Subject'] = subject
+            message = EmailMessage()
+            message.set_content(content)
+            message['From'] = configuration_parameters['email_receiver']
+            message['To'] = sender
+            message['Subject'] = subject
 
-        create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
-        message = (self.service.users().messages().send(userId="me", body=create_message).execute())
-        print(f'sent message to {message} Message Id: {message["id"]}')
+            create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+            message = (self.service.users().messages().send(userId="me", body=create_message).execute())
+            print(f'Notify sender {sender} Message Id: {message["id"]}')
+            sys.stdout.flush()
+        except HttpError as error:
+            print(f'An error occurred: {error}')
+            sys.stdout.flush()
 
     @staticmethod
     def __notification_content(user_name: AnyStr, email: AnyStr, filename: AnyStr) -> (AnyStr, AnyStr):
