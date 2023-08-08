@@ -15,11 +15,14 @@ let email = document.getElementById("email_id")
    Function handler for loading the file
 */
 const fileHandler = (file, name, type) => {
-  if (type.split("/")[1] !== "pdf") {
+  let fileType = type.split("/")[1]
+  /*
+  if (fileType !== "png" || fileType !== "pdf") {
     //File Type Error
-    error.innerText = "Format of floor plan " + type + " is incorrect. It should be PDF";
+    error.innerText = "Format of floor plan " + type + " is incorrect. It should be PDF format";
     return false;
   }
+  */
   error.innerText = "";
   let reader = new FileReader();
   reader.readAsDataURL(file);
