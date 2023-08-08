@@ -34,7 +34,7 @@ class ConfigUtil(object):
 
     @staticmethod
     def default_config_parameters() -> Optional[Dict[AnyStr, AnyStr]]:
-        configuration_util = ConfigUtil('config.csv')
+        configuration_util = ConfigUtil('src/config.csv')
         return configuration_util.load_config_variables()
 
 
@@ -42,6 +42,6 @@ configuration_parameters = ConfigUtil.default_config_parameters()
 
 
 if __name__ == '__main__':
-    config_util = ConfigUtil('config.csv')
+    config_util = ConfigUtil('src/config.csv')
     dictionary = config_util.load_config_variables()
     print(str(dictionary))
