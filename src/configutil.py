@@ -37,7 +37,6 @@ class ConfigUtil(object):
         configuration_util = ConfigUtil('../config.csv')
         return configuration_util.load_config_variables()
 
-
 configuration_parameters = ConfigUtil.default_config_parameters()
 
 
