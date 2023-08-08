@@ -10,9 +10,8 @@ class KeyEncryption(object):
         Encrypt and decrypt a key through a Fernet generator. The encrypted key is encoded
         as an array of bytes.
     """
-    # key = Fernet.generate_key()
-
-    key = os.environ['FERNET_KEY']
+    key = Fernet.generate_key()
+    # key = os.environ['FERNET_KEY']
     fernet = Fernet(key)
 
     def encrypt(self, key: AnyStr) -> bytes:
