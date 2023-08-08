@@ -66,6 +66,7 @@ class GmailClient(object):
 
     def send(self, sender: AnyStr, username: AnyStr, email: AnyStr, attachment: AnyStr) -> None:
         self.__notify_company(sender, username, email, attachment)
+        time.sleep(1)
         self.__notify_sender(sender, attachment)
         time.sleep(2)
 
@@ -109,6 +110,7 @@ class GmailClient(object):
 
             create_message = {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
             message = (self.service.users().messages().send(userId="me", body=create_message).execute())
+            time.sleep(2)
             print(f'Notify sender {sender} Message Id: {message["id"]}')
             sys.stdout.flush()
         except HttpError as error:

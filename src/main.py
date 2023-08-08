@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from typing import AnyStr, Optional
 from src.configutil import configuration_parameters
 from src.gmailclient import GmailClient
+import time
 
 
 class FileOptions(BaseModel):
@@ -77,6 +78,7 @@ async def upload(
         email_sender = configuration_parameters['test_sender'] if configuration_parameters['is_test'] \
             else configuration_parameters['email_sender']
         gmail_client.send(email_sender, username, email, new_file)
+        time.sleep(2)
 
         return templates.TemplateResponse("response.html", {"request": request}, 200)
     except Exception as e:
