@@ -9,7 +9,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from typing import AnyStr, Optional
 from src.configutil import configuration_parameters
-from gmailclient import GmailClient
+from src.gmailclient import GmailClient
 
 
 class FileOptions(BaseModel):
