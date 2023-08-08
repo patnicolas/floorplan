@@ -38,7 +38,6 @@ stevedore==5.1.0
 threadpoolctl==3.1.0
 tqdm==4.65.0
 typing_extensions==4.7.1
-urllib3==2.0.4
 uvicorn==0.23.2
 virtualenv==20.24.2
 virtualenv-clone==0.5.7
