@@ -86,4 +86,4 @@ async def upload(
 if __name__ == '__main__':
     import uvicorn
     port_num = int(configuration_parameters['port'])
-    uvicorn.run(app, host='localhost', port=port_num, log_level="debug")
+    uvicorn.run(app, host='0.0.0.0', port=port_num, log_level="debug")
