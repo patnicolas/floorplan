@@ -30,15 +30,22 @@ const fileHandler = (file, name, type) => {
   reader.onloadend = () => {
     //image and file name
     user_name = username.value
+    console.log('User: ' + user_name)
     let imageContainer = document.createElement("figure");
     let embed = document.createElement("embed");
     embed.src = reader.result;
     imageContainer.appendChild(embed);
     imageContainer.innerHTML += `<figcaption>From: ${user_name}  File: ${name}</figcaption>`;
     imageDisplay.appendChild(imageContainer);
-    displaySubmit("block")
+    setTimeout(displayDelay, 1000);
+    displaySubmit("block");
+    setTimeout(displayDelay, 1000);
   };
 };
+
+function displayDelay() {
+    console.log('PDF file added');
+}
 
 
 const displayDate = (dateType) => {
