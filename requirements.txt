@@ -44,7 +44,6 @@ virtualenv-clone==0.5.7
 virtualenvwrapper==4.8.4
 yarg==0.1.9
 yarl==1.9.2
-
 boto3~=1.28.18
 pandas~=2.0.3
 polars~=0.18.11
@@ -91,7 +90,6 @@ networkx~=3.1
 tenacity~=8.2.2
 contourpy~=1.0.7
 fonttools~=4.39.4
-langchain~=0.0.229
 packaging~=23.1
 tiktoken~=0.4.0
 regex~=2023.6.3
