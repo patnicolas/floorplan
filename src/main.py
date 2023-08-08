@@ -34,8 +34,8 @@ app.mount(
     name="static",
 )
 """ Instantiate JinJa2 template for Request and Response a static variable"""
-templates = Jinja2Templates(directory="./web")
-
+# templates = Jinja2Templates(directory="./web")
+templates = Jinja2Templates(directory="./src/web")
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
@@ -77,7 +77,7 @@ async def upload(
             else configuration_parameters['email_sender']
         gmail_client.send(email_sender, username, email, new_file)
 
-        return templates.TemplateResponse("response.html", {"request": request}, 200)
+        return templates.TemplateResponse("web/response.html", {"request": request}, 200)
     except Exception as e:
         print(f'ERROR: {str(e)}')
         return templates.TemplateResponse("response.html", {"request": request}, 400)
