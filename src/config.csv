@@ -10,5 +10,5 @@ email_name,Patrick Nicolas
 smtp_server,smtp.gmail.com
 email_password_key,SELECTIONS_AI_PWD
 web_path,src/web
-floor_plans_path,src/floorplans
+floor_plans_path,../floorplans
 port,8080
