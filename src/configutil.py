@@ -42,6 +42,6 @@ configuration_parameters = ConfigUtil.default_config_parameters()
 
 
 if __name__ == '__main__':
-    config_util = ConfigUtil('../../config.csv')
+    config_util = ConfigUtil('../config.csv')
     dictionary = config_util.load_config_variables()
     print(str(dictionary))

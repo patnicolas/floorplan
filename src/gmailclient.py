@@ -6,7 +6,7 @@ __copyright__ = "Copyright 2023. All rights reserved."
 import os.path
 import time
 
-from util.configutil import configuration_parameters
+from src.configutil import configuration_parameters
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow

@@ -39,7 +39,7 @@ class SmtpClient(object):
         Build a SMTP client from a CSV configuration file
         :return: Instance of SMTP client
         """
-        from util.configutil import configuration_parameters
+        from src.configutil import configuration_parameters
         is_test: bool = bool(configuration_parameters['is_test'] == 'True')
         if is_test:
             email_pwd = configuration_parameters['test_email_password_key']
