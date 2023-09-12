@@ -51,7 +51,7 @@ Here are the steps to upload floor plan and generate procurement log:
 | Date       | Version |
 |:-----------|:--------|
 | 06.27.2023 | 0.1     |
-
+| 08.04.2023 | 0.2     |
 
 ## Deployment
 ### Python modules
@@ -224,6 +224,10 @@ The concept is to match patterns in the floor plan to a spreadsheet entry (row).
 The objective is to find graphic pattern that match each entry in the spreadsheet.    
 
 ![Spreadsheet itemization](images/Spreadsheet-Itemization.png)
+
+### Neural Optical Understanding
+From a Meta paper: https://arxiv.org/abs/2308.13418v1
+
 
 
 ## Copyright

@@ -43,18 +43,38 @@ def eval3(value, lst):
     return list
 
 
+from typing import List
+def eval4(input: List[int]) -> int:
+    yy= [y*2 for y in input if y % 4 == 0]
+
+    values = map(lambda x: x*2, filter(lambda x: x%4 ==0, input))
+    values_iter = iter(values)
+    state = True
+    while state:
+        try:
+            print(next(values_iter))
+        except Exception as e:
+            state = False
+    return sum(values)
+
+
 if __name__ == '__main__':
-    import numpy as np
-    x = np.arange(28)
-    y = x.reshape(4, -1)
-    print(y)
-    f = 3
-    stride = 2
-    for i in range(0, y.shape[0], stride):
-        for j in range(0, y.shape[1], stride):
-            print(f'--------------\n{i//stride}:{i//stride+f}, {j//stride}:{j//stride+f}')
-            print(f'{i}:{i+f}, {j}:{j+f}')
-            # print(y[i:i+f,j:j+f])
+
+    l = [[1, 2, 9], [4, 3, 4], [5, 1, 6]]
+    ans =  list(map(min, l))  # [1, 3, 0]
+    print(ans)
+
+
+    def myfunc1():
+        x = "John"
+
+        def myfunc2():
+            nonlocal x
+            x = "hello"
+
+        myfunc2()
+        return x
+    print(myfunc1())
 
 
 
